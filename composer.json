@@ -1,0 +1,46 @@
+{
+    "name": "mav3rick177/rapid-pagination",
+    "description": "Rapid pagination for Laravel",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "mav3rick177",
+            "email": "y.radouani929@gmail.com"
+        }
+    ],
+    "keywords": ["laravel", "illuminate", "pagination", "paginator", "offset", "limit"],
+    "autoload": {
+        "psr-4": {
+            "mav3rick177\\RapidPagination\\": "src/"
+        },
+
+        "files": [
+            "src/Helpers/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "mav3rick177\\RapidPagination\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": "^7.1 || ^8.0",
+        "ext-json": "*",
+        "illuminate/contracts": "^5.5 || ^6.0 || ^7.0 || ^8.0 || ^9.0",
+        "illuminate/support": "^5.5 || ^6.0 || ^7.0 || ^8.0 || ^9.0",
+        "illuminate/database": "^5.5 || ^6.0 || ^7.0 || ^8.0 || ^9.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.0",
+        "php-coveralls/php-coveralls": "^2.1",
+        "nilportugues/sql-query-formatter": "^1.2"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "mav3rick177\\RapidPagination\\MacroServiceProvider"
+            ]
+        }
+    }
+}
