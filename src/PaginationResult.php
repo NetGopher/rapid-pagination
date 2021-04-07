@@ -87,7 +87,6 @@ class PaginationResult extends BasePaginationResult implements \JsonSerializable
         foreach (get_object_vars($this) as $key => $value) {
             $array[Str::snake($key)] = $value;
         }
-        dd($array);
         return $array;
     }
 
