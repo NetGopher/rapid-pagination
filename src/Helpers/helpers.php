@@ -90,8 +90,9 @@ if(!function_exists('rapid_paginator')){
         $cursor = null;
         
         // Add cursor from state to the newCursor array
-        if(isset($state_array['cursor'][$field])){
-            $cursor[$field] = $state_array['cursor'][$field];
+        if($state_array){
+            if(isset($state_array['cursor'][$field]))
+                $cursor[$field] = $state_array['cursor'][$field];
         }
         
 
