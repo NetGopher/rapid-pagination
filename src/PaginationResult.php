@@ -72,7 +72,7 @@ class PaginationResult extends BasePaginationResult implements \JsonSerializable
      */
     public function url($direction, $state)
     {
-        $uri = \URL::route(\Route::currentRouteName(), [], false) . '?'. 'direction=' . $direction . '&state=' . $state;
+        $uri = url()->current() . '?'. 'direction=' . $direction . '&state=' . $state;
         return $uri;             
     }
 

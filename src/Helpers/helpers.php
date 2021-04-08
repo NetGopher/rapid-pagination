@@ -1,6 +1,24 @@
 <?php 
 use Illuminate\Support\Facades\Route;
 
+if(!function_exists('urlsafe_b64encode')){
+    function urlsafe_b64encode($string) {
+        $data = base64_encode($string);
+        $data = str_replace(array('+','/','='),array('-','_',''),$data);
+        return $data;
+    }
+}
+if(!function_exists('urlsafe_b64decode')){
+    function urlsafe_b64decode($string) {
+        $data = str_replace(array('-','_'),array('+','/'),$string);
+        $mod4 = strlen($data) % 4;
+        if ($mod4) {
+            $data .= substr('====', $mod4);
+        }
+        return urlsafe_b64decode($data);
+    }
+}
+
 if(!function_exists('init_rapid_paginator_cache')){
     /* This function is supposed to cache 'Form' values...
     *
@@ -33,7 +51,7 @@ if(!function_exists('init_rapid_paginator_cache')){
             // Decode The State
             if(request('state')){
                 $state_base64 = request('state');
-                $state_decoded = base64_decode($state_base64);
+                $state_decoded = urlsafe_b64decode($state_base64);
                 $state_array = json_decode($state_decoded,true);
             }
 
@@ -83,7 +101,7 @@ if(!function_exists('rapid_paginator')){
         // Decode the State
         if(request('state')){
             $state_base64 = request('state');
-            $state_decoded = base64_decode($state_base64);
+            $state_decoded = urlsafe_b64decode($state_base64);
             $state_array = json_decode($state_decoded,true);
         }
 
@@ -153,8 +171,8 @@ if(!function_exists('rapid_paginator')){
         ];
 
         // Encode States
-        $base64_next_state = base64_encode(json_encode($state_next));
-        $base64_prev_state = base64_encode(json_encode($state_prev));
+        $base64_next_state = urlsafe_b64encode(json_encode($state_next));
+        $base64_prev_state = urlsafe_b64encode(json_encode($state_prev));
         
         // Set paginator previous and next Urls
         $paginator->makePreviousUrl($base64_prev_state);
