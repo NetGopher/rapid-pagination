@@ -15,7 +15,7 @@ if(!function_exists('urlsafe_b64decode')){
         if ($mod4) {
             $data .= substr('====', $mod4);
         }
-        return urlsafe_b64decode($data);
+        return base64_decode($data);
     }
 }
 
