@@ -26,7 +26,7 @@ if(!function_exists('init_rapid_paginator_cache')){
     * @return Array     $result
     *
     */
-    function init_rapid_paginator_cache($fields = null){
+    function init_rapid_paginator_cache($fields = null, $tab=0){
         //init cache
         $cache = isset($fields) ? count($fields) > 0 ? [] : null : null;
         
@@ -49,7 +49,7 @@ if(!function_exists('init_rapid_paginator_cache')){
             $state_array = null;
 
             // Decode The State
-            if(request('state')){
+            if(request('state') && request('tab') == $tab){
                 $state_base64 = request('state');
                 $state_decoded = urlsafe_b64decode($state_base64);
                 $state_array = json_decode($state_decoded,true);
@@ -84,12 +84,16 @@ if(!function_exists('rapid_paginator')){
         */
         if($sort == null)
             $sort = '>';
+        else
+            $cache['sort'] = $sort;
 
         if($field == null)
             $field = 'id';
         
         if($perPage == null)
             $perPage = 10;
+        else
+            $cache['perPage'] = $perPage;
     
         /*
         ** Extract Cursor from the State route parameter
