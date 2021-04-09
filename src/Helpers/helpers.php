@@ -26,7 +26,7 @@ if(!function_exists('init_rapid_paginator_cache')){
     * @return Array     $result
     *
     */
-    function init_rapid_paginator_cache($fields = null, $tab=0){
+    function init_rapid_paginator_cache($fields = null, $tab=1){
         //init cache
         $cache = isset($fields) ? count($fields) > 0 ? [] : null : null;
         
@@ -75,7 +75,7 @@ if(!function_exists('rapid_paginator')){
     * @param  Boolean   $seekable
     * @return Array     $result
     */
-    function rapid_paginator($query, $field = 'id', $cache = null, $sort = '>', $perPage = 10, $tab=0, $seekable = true)
+    function rapid_paginator($query, $field = 'id', $cache = null, $sort = '>', $perPage = 10, $tab=1, $seekable = true)
     {
         if($cache == null)
             init_rapid_paginator_cache(null);
