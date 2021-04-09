@@ -43,6 +43,11 @@ class PaginationResult implements \IteratorAggregate, \Countable
     public $nextUrl;
 
     /**
+     * @var null|mixed
+     */
+    public $tab;
+
+    /**
      * PaginationResult constructor.
      * Merge $meta entries into $this.
      *

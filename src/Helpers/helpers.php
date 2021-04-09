@@ -75,7 +75,7 @@ if(!function_exists('rapid_paginator')){
     * @param  Boolean   $seekable
     * @return Array     $result
     */
-    function rapid_paginator($query, $field = 'id', $cache = null, $sort = '>', $perPage = 10, $seekable = true)
+    function rapid_paginator($query, $field = 'id', $cache = null, $sort = '>', $perPage = 10, $tab=0, $seekable = true)
     {
         if($cache == null)
             init_rapid_paginator_cache(null);
@@ -99,7 +99,7 @@ if(!function_exists('rapid_paginator')){
         $state_array = null;
 
         // Decode the State
-        if(request('state')){
+        if(request('state') && request('tab') == $tab){
             $state_base64 = request('state');
             $state_decoded = urlsafe_b64decode($state_base64);
             $state_array = json_decode($state_decoded,true);
@@ -174,10 +174,12 @@ if(!function_exists('rapid_paginator')){
         $base64_next_state = urlsafe_b64encode(json_encode($state_next));
         $base64_prev_state = urlsafe_b64encode(json_encode($state_prev));
         
+        //Set tab id
+        $paginator->setTabID($tab);
+        
         // Set paginator previous and next Urls
         $paginator->makePreviousUrl($base64_prev_state);
         $paginator->makeNextUrl($base64_next_state);
-        
 
         $result = [
             'items' => $paginator,

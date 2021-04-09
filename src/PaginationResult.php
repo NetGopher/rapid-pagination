@@ -46,7 +46,7 @@ class PaginationResult extends BasePaginationResult implements \JsonSerializable
     }
 
     /**
-     * Get the URL for the next page.
+     * Set URL for the previous page.
      *
      * @return string|null
      */
@@ -56,7 +56,7 @@ class PaginationResult extends BasePaginationResult implements \JsonSerializable
     }
 
     /**
-     * Get the URL for the next page.
+     * Set URL for the next page.
      *
      * @return string|null
      */
@@ -65,6 +65,18 @@ class PaginationResult extends BasePaginationResult implements \JsonSerializable
         $this->nextUrl = $this->url('next', $state);
     }
 
+
+    /**
+     * Set URL for the next page.
+     *
+     * @return string|null
+     */
+    public function setTabID($tab)
+    {
+        $this->tab = $tab;
+    }
+
+
     /**
      * Get the URL.
      *
@@ -72,7 +84,7 @@ class PaginationResult extends BasePaginationResult implements \JsonSerializable
      */
     public function url($direction, $state)
     {
-        $uri = url()->current() . '?'. 'direction=' . $direction . '&state=' . $state;
+        $uri = url()->current() . '?'. 'direction=' . $direction . '&state=' . $state . '&tab=' . $this->tab;
         return $uri;             
     }
 
