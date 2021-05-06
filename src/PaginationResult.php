@@ -85,6 +85,7 @@ class PaginationResult extends BasePaginationResult implements \JsonSerializable
      */
     public function appends($key, $value = null)
     {
+        var_dump($key);
         if (is_null($key)) {
             return $this;
         }
@@ -92,7 +93,7 @@ class PaginationResult extends BasePaginationResult implements \JsonSerializable
         if (is_array($key)) {
             return $this->appendArray($key);
         }
-
+        
         return $this->addQuery($key, $value);
     }
 
@@ -137,7 +138,6 @@ class PaginationResult extends BasePaginationResult implements \JsonSerializable
     {
         $uri = url()->current() . '?'. 'direction=' . $direction . '&state=' . $state . '&tab=' . $this->tab;
         // append query to the URI
-        var_dump($this->query);
         if (is_array($this->query) || is_object($this->query))
         {
             foreach ($this->query as $key => $value){
