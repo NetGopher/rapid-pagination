@@ -82,7 +82,7 @@ if(!function_exists('rapid_paginator')){
         /*
         ** Setup Default values
         */
-        if($sort == null)
+        /*if($sort == null)
             $sort = '>';
         else
             $cache['sort'] = $sort;
@@ -93,7 +93,7 @@ if(!function_exists('rapid_paginator')){
         if($perPage == null)
             $perPage = 10;
         else
-            $cache['perPage'] = $perPage;
+            $cache['perPage'] = $perPage;*/
     
         /*
         ** Extract Cursor from the State route parameter
