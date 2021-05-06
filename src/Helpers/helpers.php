@@ -57,8 +57,11 @@ if(!function_exists('init_rapid_paginator_cache')){
 
             // Append the state cache key/value pairs to the new cache...
             if(isset($state_array['cache'])){
-                foreach ($state_array['cache'] as $key => $value) {
-                    $cache[$key] = $value;
+                if (is_array($state_array['cache']) || is_object($state_array['cache']))
+                { 
+                    foreach ($state_array['cache'] as $key => $value) {
+                        $cache[$key] = $value;
+                    }
                 }
             }
         }
