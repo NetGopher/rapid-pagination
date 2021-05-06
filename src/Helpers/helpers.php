@@ -181,13 +181,15 @@ if(!function_exists('rapid_paginator')){
         //Set tab id
         $paginator->setTabID($tab);
         
+        if($appendQuery){
+            $paginator->appends(request()->query());
+        }
+        
         // Set paginator previous and next Urls
         $paginator->makePreviousUrl($base64_prev_state);
         $paginator->makeNextUrl($base64_next_state);
 
-        if($appendQuery){
-            $paginator->appends(request()->query());
-        }
+        
 
         $result = [
             'items' => $paginator,
