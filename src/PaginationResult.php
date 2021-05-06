@@ -122,7 +122,8 @@ class PaginationResult extends BasePaginationResult implements \JsonSerializable
     protected function addQuery($key, $value)
     {
         if ($key !== "direction" && $key !== "state" && $key !== "tab") {
-            $this->query[$key] = $value;
+            if($value)
+                $this->query[$key] = $value;
         }
 
         return $this;
