@@ -137,8 +137,11 @@ class PaginationResult extends BasePaginationResult implements \JsonSerializable
     {
         $uri = url()->current() . '?'. 'direction=' . $direction . '&state=' . $state . '&tab=' . $this->tab;
         // append query to the URI
-        foreach ($this->query as $key => $value){
-            $uri = $uri . '&' . $key . '=' . $value;
+        if (is_array($this->query) || is_object($this->query))
+        {
+            foreach ($this->query as $key => $value){
+                $uri = $uri . '&' . $key . '=' . $value;
+            }
         }
         return $uri;             
     }
