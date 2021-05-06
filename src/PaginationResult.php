@@ -121,7 +121,6 @@ class PaginationResult extends BasePaginationResult implements \JsonSerializable
      */
     protected function addQuery($key, $value)
     {
-        //var_dump($key);
         if ($key !== "direction" && $key !== "state" && $key !== "tab") {
             $this->query[$key] = $value;
         }
@@ -138,7 +137,6 @@ class PaginationResult extends BasePaginationResult implements \JsonSerializable
     {
         $uri = url()->current() . '?'. 'direction=' . $direction . '&state=' . $state . '&tab=' . $this->tab;
         // append query to the URI
-        var_dump($this->query);
         if (is_array($this->query) || is_object($this->query))
         {
             foreach ($this->query as $key => $value){
