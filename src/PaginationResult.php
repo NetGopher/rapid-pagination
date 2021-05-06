@@ -76,6 +76,57 @@ class PaginationResult extends BasePaginationResult implements \JsonSerializable
         $this->tab = $tab;
     }
 
+    /**
+     * Add a set of query string values to the paginator.
+     *
+     * @param  array|string|null  $key
+     * @param  string|null  $value
+     * @return $this
+     */
+    public function appends($key, $value = null)
+    {
+        if (is_null($key)) {
+            return $this;
+        }
+
+        if (is_array($key)) {
+            return $this->appendArray($key);
+        }
+
+        return $this->addQuery($key, $value);
+    }
+
+    /**
+     * Add an array of query string values.
+     *
+     * @param  array  $keys
+     * @return $this
+     */
+    protected function appendArray(array $keys)
+    {
+        foreach ($keys as $key => $value) {
+            $this->addQuery($key, $value);
+        }
+
+        return $this;
+    }
+
+
+    /**
+     * Add a query string value to the paginator.
+     *
+     * @param  string  $key
+     * @param  string  $value
+     * @return $this
+     */
+    protected function addQuery($key, $value)
+    {
+        if ($key !== "direction" && $key !== "state" && $key !== "tab") {
+            $this->query[$key] = $value;
+        }
+
+        return $this;
+    }
 
     /**
      * Get the URL.
@@ -85,6 +136,10 @@ class PaginationResult extends BasePaginationResult implements \JsonSerializable
     public function url($direction, $state)
     {
         $uri = url()->current() . '?'. 'direction=' . $direction . '&state=' . $state . '&tab=' . $this->tab;
+        // append query to the URI
+        foreach ($this->query as $key => $value){
+            $uri = $uri . '&' . $key . '=' . $value;
+        }
         return $uri;             
     }
 
