@@ -50,7 +50,7 @@ class PaginationResult implements \IteratorAggregate, \Countable
     /**
      * @var null|mixed
      */
-    public $query;
+    public $query = [];
 
     /**
      * PaginationResult constructor.
