@@ -75,7 +75,7 @@ if(!function_exists('rapid_paginator')){
     * @param  Boolean   $seekable
     * @return Array     $result
     */
-    function rapid_paginator($query, $field = 'id', $cache = null, $sort = '>', $perPage = 10, $tab=1, $seekable = true)
+    function rapid_paginator($query, $field = 'id', $appendQuery=false, $cache = null, $sort = '>', $perPage = 10, $tab=1, $seekable = true)
     {
         if($cache == null)
             init_rapid_paginator_cache(null);
